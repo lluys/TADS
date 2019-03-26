@@ -1,5 +1,10 @@
 language: c
 sudo: false # only for faster builds
 script:
+<<<<<<< Updated upstream
  - gcc main.c -o prueba
  - ./prueba
+=======
+	- gcc main.c -o prueba
+	- ./prueba
+>>>>>>> Stashed changes
