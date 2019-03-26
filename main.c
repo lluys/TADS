@@ -3,6 +3,9 @@
 
 
 int main(){
+
+
   printf("Hola Mundo");
+  fflush(stdout);
   return 0;
 }
