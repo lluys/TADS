@@ -1,5 +1,5 @@
-language:c
+language: c
 sudo: false # only for saster builds
 sript:
-	-gcc main.c -o prueba
+	- gcc main.c -o prueba
 	- ./prueba
