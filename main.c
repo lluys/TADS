@@ -2,11 +2,12 @@
 #include <stdio.h>
 
 
-int main(){
+int main(int argc, const char argv[][]){
+  int num_sensores = atoi(argv[1]);
+  int num_lecturas = atoi(argv[3]);
+  float tiempo_lectura = atof(argv[2]);
   
-int x = 10;
-  
-  printf("Hola Mundo. Esto es el numero diez: %d", x);
+  printf("Datos de entrada sensores:%d, lecturas:%d, frecuencias: %f", num_sensores, num_lecturas, tiempo_lecturas);
   
   
   
