@@ -3,9 +3,10 @@
 
 
 int main(){
-
-
-  printf("Hola Mundo");
+  
+int x = 10;
+  
+  printf("Hola Mundo: %d", x);
   fflush(stdout);
   return 0;
 }
