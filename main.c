@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 
-int main(int argc, const char argv[][]){
+int main(int argc, const char* argv[]){
   int num_sensores = atoi(argv[1]);
   int num_lecturas = atoi(argv[3]);
   float tiempo_lectura = atof(argv[2]);
