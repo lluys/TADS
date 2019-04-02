@@ -1,11 +1,27 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+//TODO comprobar compatibilidad con windows y linux por  sleep()
+#include <unistd.h>
+#include <windows.h>
 
-
-void leer()
-{
-	
+void leer(int** datos, int sensores, int lecturas, int tiempo){
+	int i, j;
+	//el dato a leer en cada iteracion sera  un numero aleatorio dentro de los rangos  del problema
+	int dato, xr, yr;
+	int cont = 0;
+	while(cont != sensores*lecturas){
+        Sleep((unsigned int)tiempo);
+    	xr = rand()%sensores;
+        yr = rand()%lecturas;
+        dato = datos[xr][yr];
+        if(dato != 0){
+       	    datos[xr][yr] = 0;
+        }else{
+            cont--;
+        }
+        cont++;
+    }
 }
 
 void simular(char* nombre, int sensores, int lecturas){
@@ -46,9 +62,9 @@ int main(int argc, const char* argv[]){
 	{
 		datosSensores[i] = (int *)malloc(num_lecturas*sizeof(int));
 	}
-
-
-
+    
+    leer(datosSensores, num_sensores, num_lecturas, tiempo_lectura);
+    
 	for (i=0;i<num_sensores;i++)
 	{
 		free(datosSensores[i]);
