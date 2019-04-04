@@ -1,12 +1,16 @@
 #include "Estructuras.h"
 
-
 void leer(int** datos, int sensores, int lecturas, int tiempo){
 	int i, j;
 	//el dato a leer en cada iteracion sera  un numero aleatorio dentro de los rangos  del problema
 	int dato, xr, yr;
 	int restantes = sensores;
 	int *cont;
+	
+	char etiqueta[2];
+	strcpy(etiqueta, "S");
+	struct Lectura lectura;
+	
 	cont = (int*)malloc(sizeof(int)*sensores);
 	for(i=0;i<sensores;i++){
 		cont[i] = 0;
@@ -20,11 +24,14 @@ void leer(int** datos, int sensores, int lecturas, int tiempo){
 			//salimos, este sensor ya ha acabado
 			restantes--;
 		}else{
+			itoa (xr,etiqueta+1,10);
+			//strncpy();
 			dato = datos[xr][cont[xr]];
 			cont[xr]++;
 		}
     }
 }
+
 
 void simular(char* nombre, int sensores, int lecturas){
 	FILE *f;

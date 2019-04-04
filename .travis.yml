@@ -1,5 +1,5 @@
 language: c
 sudo: false # only for faster builds
 script:
- - gcc main.c -o prueba
+ - gcc main.c Estructuras.h -o prueba
  - ./prueba 5 3 10
