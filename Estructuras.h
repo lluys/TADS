@@ -10,3 +10,5 @@ typedef struct{
 	float valor;
 	time_t momento;
 }Lectura;
+
+tyoedef Lectura t_lectura;

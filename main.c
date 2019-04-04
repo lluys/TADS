@@ -11,7 +11,7 @@ void leer(int* datos, int sensor, int lecturas){
 	itoa (sensor,etiqueta+1,10);
 	
 	printf("%s",  etiqueta);
-	struct Lectura lectura;
+	t_lectura lectura;
 	
 	
 	while(cont<lecturas){
