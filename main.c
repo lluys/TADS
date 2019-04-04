@@ -3,7 +3,7 @@
 #include <math.h>
 //TODO comprobar compatibilidad con windows y linux por  sleep()
 #include <unistd.h>
-#include <windows.h>
+//#include <windows.h>
 
 void leer(int** datos, int sensores, int lecturas, int tiempo){
 	int i, j;
@@ -17,7 +17,7 @@ void leer(int** datos, int sensores, int lecturas, int tiempo){
 	}
 	
 	while(restantes != 0){
-        Sleep((unsigned int)tiempo);
+        sleep((unsigned int)tiempo);
 		xr = rand()%sensores;
 		
 		if(cont[xr]==lecturas-1){
