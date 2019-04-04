@@ -1,35 +1,25 @@
 #include "Estructuras.h"
 
-void leer(int** datos, int sensores, int lecturas, int tiempo){
+void leer(int* datos, int sensor, int lecturas){
 	int i, j;
 	//el dato a leer en cada iteracion sera  un numero aleatorio dentro de los rangos  del problema
-	int dato, xr, yr;
-	int restantes = sensores;
-	int *cont;
-	
+	int dato;
+	int cont=0;
 	char etiqueta[2];
 	strcpy(etiqueta, "S");
+	
+	itoa (sensor,etiqueta+1,10);
+	
+	printf("%s",  etiqueta);
 	struct Lectura lectura;
 	
-	cont = (int*)malloc(sizeof(int)*sensores);
-	for(i=0;i<sensores;i++){
-		cont[i] = 0;
-	}
 	
-	while(restantes != 0){
-        sleep((unsigned int)tiempo);
-		xr = rand()%sensores;
-		
-		if(cont[xr]==lecturas-1){
-			//salimos, este sensor ya ha acabado
-			restantes--;
-		}else{
-			itoa (xr,etiqueta+1,10);
-			//strncpy();
-			dato = datos[xr][cont[xr]];
-			cont[xr]++;
-		}
-    }
+	while(cont<lecturas){
+		//strncpy();
+		dato = datos[cont];
+		cont++;
+	}
+    
 }
 
 
@@ -72,7 +62,13 @@ int main(int argc, const char* argv[]){
 		datosSensores[i] = (int *)malloc(num_lecturas*sizeof(int));
 	}
     
-    leer(datosSensores, num_sensores, num_lecturas, tiempo_lectura);
+	for (i=0;i<num_sensores;i++)
+	{
+		if(i != 0)	sleep((unsigned int)tiempo_lectura);
+		leer(datosSensores[i], i, num_lecturas);
+	}
+	
+    
     
 	for (i=0;i<num_sensores;i++)
 	{

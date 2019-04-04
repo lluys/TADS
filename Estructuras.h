@@ -5,8 +5,8 @@
 #include <math.h>
 
 
-typedef struct Lectura{
+typedef struct{
 	char etiqueta[2];
 	float valor;
 	time_t momento;
-}
+}Lectura;
