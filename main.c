@@ -9,18 +9,24 @@ void leer(int** datos, int sensores, int lecturas, int tiempo){
 	int i, j;
 	//el dato a leer en cada iteracion sera  un numero aleatorio dentro de los rangos  del problema
 	int dato, xr, yr;
-	int cont = 0;
-	while(cont != sensores*lecturas){
+	int restantes = sensores;
+	int *cont;
+	cont = (int*)malloc(sizeof(int)*sensores);
+	for(i=0;i<sensores;i++){
+		cont[i] = 0;
+	}
+	
+	while(restantes != 0){
         Sleep((unsigned int)tiempo);
-    	xr = rand()%sensores;
-        yr = rand()%lecturas;
-        dato = datos[xr][yr];
-        if(dato != 0){
-       	    datos[xr][yr] = 0;
-        }else{
-            cont--;
-        }
-        cont++;
+		xr = rand()%sensores;
+		
+		if(cont[xr]==lecturas-1){
+			//salimos, este sensor ya ha acabado
+			restantes--;
+		}else{
+			dato = datos[xr][cont[xr]];
+			cont[xr]++;
+		}
     }
 }
 
