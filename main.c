@@ -25,6 +25,7 @@ void leer(int** datos, int sensores, int lecturas, int tiempo){
 			restantes--;
 		}else{
 			dato = datos[xr][cont[xr]];
+			//TODO  añadir etiquetas  identificativas al dato
 			cont[xr]++;
 		}
     }
