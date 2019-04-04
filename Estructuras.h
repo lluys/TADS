@@ -11,4 +11,4 @@ typedef struct{
 	time_t momento;
 }Lectura;
 
-tyoedef Lectura t_lectura;
+typedef Lectura t_lectura;
