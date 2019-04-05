@@ -1,9 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-//TODO comprobar compatibilidad con windows y linux por  sleep()
 #include <unistd.h>
-//#include <windows.h>
+
 
 void leer(int** datos, int sensores, int lecturas, int tiempo){
 	int i, j;
