@@ -1,5 +1,15 @@
 #include "Estructuras.h"
 
+void mostrarMatriz(int **datos,int fil, int col  ){
+	int i,j;
+	for(i=0;i<fil;i++){
+		for(j=0;j<col;j++){
+			printf("%d\t\t",datos[i][j]);
+		}
+		printf("\n");
+	}
+}
+
 void leer(int* datos, int sensor, int lecturas){
 	int i, j;
 	//el dato a leer en cada iteracion sera  un numero aleatorio dentro de los rangos  del problema
@@ -46,30 +56,30 @@ void simular(char* nombre, int sensores, int lecturas){
 }
 
 void  cargarDatos(char* archivo, int** datos, int sensores, int lecturas){
-	FILE* file = fopen(archivo, "r"); /* should check the result */
+	FILE* file = fopen(archivo, "r"); 
     char line[256];
-	int numTok;
+	int numTok, i;
 	char s2[4] = " \n\t";
 	char *ptr;
-	int linea =0;
-	int contador;
-    while (fgets(line, sizeof(line), file)) {
-		contador=0;
-		printf("contador: %d\n",  contador);
-		ptr = strtok( line, s2 );    // Primera llamada => Primer token
-		datos[contador][linea] =  atoi(ptr);
-		while( (ptr = strtok( NULL, s2 )) != NULL ) {   // Posteriores llamadas
-			contador++;
-			datos[contador][linea] =  atoi(ptr);
-		}
-		
-		printf("(%s)", line); 
+    int sens, lect=1;	
+    
+	//Etiqueta
+	fgets(line, sizeof(line), file);
+	for(i=0;i<sensores;i++){
+        datos[i][0]=i;
     }
-    /* may check feof here to make a difference between eof and io failure -- network
-       timeout for instance */
-
-    fclose(file);
-	
+	//valores
+    while (lect <= lecturas && fgets(line, sizeof(line), file)) {
+        sens=0;
+		ptr = strtok( line, s2 );    // Primera llamada => Primer token
+		datos[sens][lect]=atoi(ptr);
+		while( (ptr = strtok( NULL, s2 )) != NULL ) {   // Posteriores llamadas
+			sens++;
+			datos[sens][lect]=atoi(ptr);
+		}
+		lect++;
+    }
+    
 }
 
 int main(int argc, const char* argv[]){
@@ -91,7 +101,7 @@ int main(int argc, const char* argv[]){
 		datosSensores[i] = (int *)malloc(num_lecturas*sizeof(int));
 	}
 	
-    //cargarDatos("sensores.txt",  datosSensores, num_sensores, num_lecturas);
+    cargarDatos("sensores.txt",  datosSensores, num_sensores, num_lecturas);
 	
 	for (i=0;i<num_sensores;i++)
 	{
