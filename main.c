@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 void simular(char* nombre, int sensores){
 	FILE *f;
@@ -12,7 +13,7 @@ void simular(char* nombre, int sensores){
 	}
 	
 	fprintf(f, "\n");	
-	fclose(nombre);
+	fclose(f);
 
 }
 
@@ -21,14 +22,20 @@ void simular(char* nombre, int sensores){
 int main(int argc, const char* argv[]){
     int i, j;
 	FILE *f;
-		
-	int num_sensores = atoi(argv[1]);
+	clock_t tini;
+ 	int num_sensores = atoi(argv[1]);
 	int num_lecturas = atoi(argv[3]);
 	int tiempo_lectura = atoi(argv[2]);
-	//printf("Datos de entrada sensores:%d, lecturas:%d, frecuencias: %d", num_sensores, num_lecturas, tiempo_lectura);  
 	
+	//printf("Datos de entrada sensores:%d, lecturas:%d, frecuencias: %d", num_sensores, num_lecturas, tiempo_lectura);  
+		
 	while(1){
-		simular("sensores.txt", num_sensores);
+		tini = clock();
+		while(((double)(clock() - tini) / CLOCKS_PER_SEC) < tiempo_lectura){
+            //Tic Tac, no tenemos nueva lectura aun
+            //printf("Total time taken by CPU: %f\n", ((double)(clock() - tini) / CLOCKS_PER_SEC)  );
+		}
+		simular("sensores.txt", 5);
 	}
     
   //Esta linea para que el Travis no nos borre nada al compilar
