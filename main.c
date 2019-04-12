@@ -1,8 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <stdbool.h>
-#include <string.h>
+#include "Estructuras.h"
+
 
 void simular(int* datos, char* nombre, int sensores){
 	FILE *f;
