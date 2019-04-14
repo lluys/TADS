@@ -1,5 +1,7 @@
 #include "Estructuras.h"
 
+
+
 //Solo estructura, no se ha implementeado correctamente aun
 void ordenarBurbuja(t_lectura* datos, int num_sensores){
     int i, j;
