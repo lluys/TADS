@@ -5,9 +5,9 @@
 #include <string.h>
 
 typedef struct{
-	char etiqueta[2];
-	float valor;
-	time_t momento;
+	char etiqueta[5];
+	int valor;
+	//time_t momento;
 }Lectura;
 
 typedef Lectura t_lectura;

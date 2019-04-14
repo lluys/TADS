@@ -1,15 +1,25 @@
 #include "Estructuras.h"
 
 
-void simular(int* datos, char* nombre, int sensores){
+void etiquetar(t_lectura datos, int sensor){
+    strcpy(datos.etiqueta, "S");
+    //printf("%s\n", datos.etiqueta);
+    itoa(sensor, datos.etiqueta+1, 10);
+    //printf("%s\n", datos.etiqueta);
+}
+
+void simular(t_lectura* datos, char* nombre, int sensores){
 	FILE *f;
 	int j;
 	f = fopen(nombre, "w");
     
 	
 	for(j=0;j<sensores;j++){
-		datos[j] = rand()%100;
-		fprintf(f, "%d\t", datos[j]);
+		datos[j].valor = rand()%100;
+		etiquetar(datos[j], j);
+		
+		//printf("datos[j].valor: %d", datos[j].valor);
+		fprintf(f, "%d\t", datos[j].valor);
 	}
 	
 	fprintf(f, "\n");	
@@ -20,9 +30,7 @@ void simular(int* datos, char* nombre, int sensores){
 
 
 int main(int argc, const char* argv[]){
-
     int i, j, contador;
-
 	int n_aleatorio;
 
 	FILE *f;
@@ -30,11 +38,12 @@ int main(int argc, const char* argv[]){
  	int num_sensores = atoi(argv[1]);
 	int num_lecturas = atoi(argv[3]);
 	int tiempo_lectura = atoi(argv[2]);
-	int *datos_sensores, *sensores_leidos;
+	t_lectura *datos_sensores;
+	int *sensores_leidos;
 	bool reinicio_busqueda;
 	//printf("Datos de entrada sensores:%d, lecturas:%d, frecuencias: %d", num_sensores, num_lecturas, tiempo_lectura);  
 	
-	datos_sensores = (int*)malloc(sizeof(int)*num_sensores);
+	datos_sensores = (int*)malloc(sizeof(t_lectura)*num_sensores);
 	sensores_leidos = (int*)malloc(sizeof(int)*num_sensores);
 
 
