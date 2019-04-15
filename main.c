@@ -4,6 +4,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
 
 //Solo estructura, no se ha implementeado correctamente aun
@@ -79,6 +80,7 @@ void simular(t_lectura* datos, char* nombre, int sensores){
 	int j;
 	f = fopen(nombre, "w");
     
+	double media=0;
 	
 	for(j=0;j<sensores;j++){
 		datos[j].valor = rand()%100;
@@ -86,11 +88,26 @@ void simular(t_lectura* datos, char* nombre, int sensores){
 		
 		printf("datos[j].valor: %d\n", datos[j].valor);
 		fprintf(f, "%d\t", datos[j].valor);
+		
+		media+=datos[j].valor;
+	}
+
+	media=media/sensores;
+
+	double desv=0;
+
+	for(j=0;j<sensores;j++)
+	{
+		desv+=pow((double)datos[j].valor-media,2);
 	}
 	
+	desv = sqrt(desv/sensores);
+
+	printf("Media: %.2f\n", media);
+	printf("Desviación: %.5f\n", desv);
+
 	fprintf(f, "\n");	
 	fclose(f);
-
 }
 
 void escribirFichero(t_lectura* datos, char* nombre, int sensores){
