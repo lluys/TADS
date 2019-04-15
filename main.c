@@ -67,6 +67,7 @@ int leerDatos(t_lectura* datos_sensores, int num_sensores, int num_lecturas, int
             }
 		}//Hemos encontrado un sensor por leer
 		sensores_leidos[n_aleatorio]++;
+		datos_sensores[n_aleatorio].momento = ((double)(clock() - tini) / CLOCKS_PER_SEC);
 		
 		contador++;
 	}//Salimos de las lecturas
@@ -82,7 +83,6 @@ void simular(t_lectura* datos, char* nombre, int sensores){
 	for(j=0;j<sensores;j++){
 		datos[j].valor = rand()%100;
 		datos[j].etiqueta = j+1;
-//		etiquetar(datos[j], j);
 		
 		printf("datos[j].valor: %d\n", datos[j].valor);
 		fprintf(f, "%d\t", datos[j].valor);

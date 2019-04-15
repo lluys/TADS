@@ -7,7 +7,7 @@
 typedef struct{
 	int etiqueta;
 	int valor;
-	//time_t momento;
+	time_t momento;
 }Lectura;
 
 typedef Lectura t_lectura;
