@@ -19,27 +19,42 @@ int main(int argc, const char* argv[]){
     int etiqueta;
     double tiempo;
     
-    while(1)
+    FILE* archivo;
+    archivo = fopen("envio.txt", "r");
+    
+    while(archivo == NULL)
     {
-        FILE* archivo;
-        archivo = fopen("envio.txt", "r");
+        printf(".");
+    }
+    
+    printf("\n");
+    
+    while(!feof(archivo))
+    {
+        fscanf(archivo, "%d", &valor);
+        fscanf(archivo, "%d", &etiqueta);
+        fscanf(archivo, "%f", &tiempo);
         
-        if(archivo == NULL)
+        datos_sensores[etiqueta-1].valor = valor;
+        datos_sensores[etiqueta-1].etiqueta = etiqueta;
+        datos_sensores[etiqueta-1].momento = tiempo;
+    }
+	
+	for(i = 0; i < num_sensores; i++)
+    {
+        if (datos_sensores[i].valor > 100)
         {
-            return-1;
+            printf("Alerta roja en sensor %d -> Valor: %d\n", i+1, datos_sensores[i].valor);
         }
-        
-        while(!feof(archivo))
+        else if(datos_sensores[i].valor > 50)
         {
-            fscanf(archivo, "%d", &valor);
-            fscanf(archivo, "%d", &etiqueta);
-            fscanf(archivo, "%f", &tiempo);
-            
-            datos_sensores[etiqueta-1].valor = valor;
-            datos_sensores[etiqueta-1].etiqueta = etiqueta;
-            datos_sensores[etiqueta-1].momento = tiempo;
+            printf("Alerta amarilla en sensor %d -> Valor: %d\n", i+1, datos_sensores[i].valor);
         }
-	}//fin bucle
+        else
+        {
+            printf("Alerta verde en sensor %d -> Valor: %d\n", i+1, datos_sensores[i].valor);
+        }
+    }
     
   //Esta linea para que el Travis no nos borre nada al compilar
   printf("\n\n");
