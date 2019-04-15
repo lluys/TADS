@@ -93,6 +93,23 @@ void simular(t_lectura* datos, char* nombre, int sensores){
 
 }
 
+void escribirFichero(t_lectura* datos, char* nombre, int sensores){
+	FILE *f;
+	int j;
+	f = fopen(nombre, "w");
+    
+	
+	for(j=0;j<sensores;j++){
+		fprintf(f, "%d\t%d\t%.10f\n", datos[j].valor, datos[j].etiqueta, datos[j].momento);
+	}
+	
+	fprintf(f, "\n");	
+	fclose(f);
+
+
+
+}
+
 
 int main(int argc, const char* argv[]){
     int i, j;
@@ -105,7 +122,7 @@ int main(int argc, const char* argv[]){
 	
 	//printf("Datos de entrada sensores:%d, lecturas:%d, frecuencias: %d", num_sensores, num_lecturas, tiempo_lectura);  
 	
-	datos_sensores = (int*)malloc(sizeof(t_lectura)*num_sensores);
+	datos_sensores = (t_lectura*)malloc(sizeof(t_lectura)*num_sensores);
 	
 	while(1){
 		simular(datos_sensores, "sensores.txt", num_sensores);
@@ -115,14 +132,11 @@ int main(int argc, const char* argv[]){
             return -1;
         }
         printf("\n\n");
-        for(i=0;i<num_sensores;i++){
-            printf("%d: %d\n", datos_sensores[i].etiqueta, datos_sensores[i].valor);
-        }
+        
         ordenarBurbuja(datos_sensores, num_sensores);
 		printf("\n\n");
-		for(i=0;i<num_sensores;i++){
-            printf("%d: %d\n", datos_sensores[i].etiqueta, datos_sensores[i].valor);
-        }
+		
+		escribirFichero(datos_sensores, "envio.txt", num_sensores);
 		
 		printf("Ya los hemos leido todos\n");
 	}//fin bucle infinito
