@@ -5,7 +5,7 @@
 #include <string.h>
 
 typedef struct{
-	char etiqueta[5];
+	int etiqueta;
 	int valor;
 	//time_t momento;
 }Lectura;

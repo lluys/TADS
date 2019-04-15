@@ -1,5 +1,9 @@
 #include "Estructuras.h"
-
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include <stdbool.h>
+#include <string.h>
 
 
 //Solo estructura, no se ha implementeado correctamente aun
@@ -7,7 +11,7 @@ void ordenarBurbuja(t_lectura* datos, int num_sensores){
     int i, j;
     t_lectura temp;
     for(i=0;i<num_sensores;i++){
-            printf("%s: %d\n", datos[i].etiqueta, datos[i].valor);
+            printf("%d: %d\n", datos[i].etiqueta, datos[i].valor);
         }
     for (i=1;i<num_sensores;i++)
     {
@@ -21,16 +25,7 @@ void ordenarBurbuja(t_lectura* datos, int num_sensores){
           }
        }
     }
-    
 }
-
-void etiquetar(t_lectura datos, int sensor){
-    strcpy(datos.etiqueta, "S");
-    //printf("%s\n", datos.etiqueta);
-    itoa(sensor, datos.etiqueta+1, 10);
-    printf("%s\n", datos.etiqueta);
-}
-
 
 
 int leerDatos(t_lectura* datos_sensores, int num_sensores, int num_lecturas, int tiempo_lectura){
@@ -43,14 +38,17 @@ int leerDatos(t_lectura* datos_sensores, int num_sensores, int num_lecturas, int
     for(i=0;i<num_sensores;i++){
         sensores_leidos[i] = 0;
     }
-    
+
+    tini = clock();
+	while(((double)(clock() - tini) / CLOCKS_PER_SEC) < tiempo_lectura){
+		//Tic Tac, no tenemos nueva lectura aun
+		//printf("Total time taken by CPU: %f\n", ((double)(clock() - tini) / CLOCKS_PER_SEC)  );
+	}
+
     contador = 0;
 	while(contador<num_sensores){
-		tini = clock();
-		while(((double)(clock() - tini) / CLOCKS_PER_SEC) < tiempo_lectura){
-			//Tic Tac, no tenemos nueva lectura aun
-			//printf("Total time taken by CPU: %f\n", ((double)(clock() - tini) / CLOCKS_PER_SEC)  );
-		}
+		
+		
 		reinicio_busqueda = false;
 		n_aleatorio = rand()%num_sensores;
 			
@@ -83,9 +81,10 @@ void simular(t_lectura* datos, char* nombre, int sensores){
 	
 	for(j=0;j<sensores;j++){
 		datos[j].valor = rand()%100;
-		etiquetar(datos[j], j);
+		datos[j].etiqueta = j+1;
+//		etiquetar(datos[j], j);
 		
-		printf("datos[j].valor: %d\n", &datos[j].valor);
+		printf("datos[j].valor: %d\n", datos[j].valor);
 		fprintf(f, "%d\t", datos[j].valor);
 	}
 	
@@ -110,19 +109,19 @@ int main(int argc, const char* argv[]){
 	
 	while(1){
 		simular(datos_sensores, "sensores.txt", num_sensores);
-		printf("aaaaaaaaaaaaaa%s\n", datos_sensores[0].etiqueta);
+		printf("aaaaaaaaaaaaaa%d\n", datos_sensores[0].etiqueta);
 		
 		if(!leerDatos(datos_sensores, num_sensores, num_lecturas, tiempo_lectura)){
             return -1;
         }
         printf("\n\n");
         for(i=0;i<num_sensores;i++){
-            printf("%s: %d\n", datos_sensores[i].etiqueta, datos_sensores[i].valor);
+            printf("%d: %d\n", datos_sensores[i].etiqueta, datos_sensores[i].valor);
         }
         ordenarBurbuja(datos_sensores, num_sensores);
 		printf("\n\n");
 		for(i=0;i<num_sensores;i++){
-            printf("%s: %d\n", datos_sensores[i].etiqueta, datos_sensores[i].valor);
+            printf("%d: %d\n", datos_sensores[i].etiqueta, datos_sensores[i].valor);
         }
 		
 		printf("Ya los hemos leido todos\n");
